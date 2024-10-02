@@ -163,7 +163,7 @@
         <repository>
             <id>internal.repo</id>
             <name>Temporary Staging Repository</name>
-            <url>file://${project.basedir}/../../releng/target/mvn-repo</url>
+            <url>file://${project.basedir}/../../mvn-repo</url>
         </repository>
     </distributionManagement>
 

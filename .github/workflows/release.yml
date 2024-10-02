@@ -85,6 +85,12 @@ jobs:
             quarkus.ls.ext/com.redhat.quarkus.ls/target/com.redhat.quarkus.ls-*.jar
             qute.ls/com.redhat.qute.ls/target/com.redhat.qute.ls-uber.jar
             releng/target/flat-repository/*
+      - name: Checkout quarkus-ls Maven Repo
+        uses: actions/checkout@v4
+        with:
+          repository: rgrunber/quarkus-ls
+          ref: maven
+          path: mvn-repo
       - name: Deploy Quarkus & Qute LS to Maven Repository
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -99,13 +105,11 @@ jobs:
             fi
             popd
           done
-          git reset --hard HEAD
           git config --global user.email "quarkus-ls-bot@users.noreply.github.com"
           git config --global user.name "quarkus-ls-bot"
-          mkdir -p com/redhat/microprofile/
-          cp -rp releng/target/mvn-repo/com/redhat/microprofile/* com/redhat/microprofile/
-          git fetch origin maven
-          git checkout -b maven FETCH_HEAD
+          echo mvn-repo
+          find mvn-repo/
+          pushd mvn-repo
           git add com/
           git commit -m "Publish ${{ inputs.QUARKUS_LS_VERSION }}"
           git push -f origin maven
