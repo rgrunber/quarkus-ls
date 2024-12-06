@@ -1,3 +1,4 @@
+
 [![Tests workflow](https://github.com/redhat-developer/quarkus-ls/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/redhat-developer/quarkus-ls/actions)
 
 # quarkus-ls
